@@ -5,7 +5,11 @@ class TestsController < Simpler::Controller
   end
 
   def create
+    status 201
+    render plain: "Plain text response"
+  end
 
+  def show
   end
 
 end
