@@ -1,0 +1,6 @@
+I, [2020-09-07T18:10:42.415002 #14381]  INFO -- : 
+Request: GET /tests/101
+Handler: TestsController#show
+Parameters: {":id"=>"101"}
+Response: 200 [text/html] 
+

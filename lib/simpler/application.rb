@@ -28,10 +28,15 @@ module Simpler
 
     def call(env)
       route = @router.route_for(env)
-      controller = route.controller.new(env)
-      action = route.action
+      if route
+        controller = route.controller.new(env)
+        action = route.action
+        env['simpler.params'] = route.params
 
-      make_response(controller, action)
+        make_response(controller, action)
+      else
+        bad_response
+      end
     end
 
     private
@@ -48,6 +53,12 @@ module Simpler
       database_config = YAML.load_file(Simpler.root.join('config/database.yml'))
       database_config['database'] = Simpler.root.join(database_config['database'])
       @db = Sequel.connect(database_config)
+    end
+
+    def bad_response
+      response = Rack::Response.new
+      response.status = 404
+      response.finish
     end
 
     def make_response(controller, action)

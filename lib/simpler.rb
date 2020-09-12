@@ -1,5 +1,7 @@
 require 'pathname'
 require_relative 'simpler/application'
+require 'pry'
+require 'pry-byebug'
 
 module Simpler
 
